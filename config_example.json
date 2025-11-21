@@ -1,0 +1,124 @@
+{
+  "world": {
+    "width": 10,
+    "height": 10
+  },
+  "locations": [
+    {
+      "name": "home",
+      "x": 0,
+      "y": 0,
+      "type": "Residence",
+      "capacity": 5,
+      "products": []
+    },
+    {
+      "name": "Coffee Shop",
+      "x": 3,
+      "y": 3,
+      "type": "Restaurant",
+      "capacity": 10,
+      "products": [
+        {
+          "name": "coffee",
+          "price": 5.0,
+          "stock": 100,
+          "satisfies_need": "energy"
+        },
+        {
+          "name": "sandwich",
+          "price": 8.0,
+          "stock": 50,
+          "satisfies_need": "energy"
+        }
+      ]
+    },
+    {
+      "name": "Grocery Store",
+      "x": 5,
+      "y": 5,
+      "type": "Grocery",
+      "capacity": 15,
+      "products": [
+        {
+          "name": "groceries",
+          "price": 30.0,
+          "stock": 200,
+          "satisfies_need": "energy"
+        }
+      ]
+    },
+    {
+      "name": "Chicken Shop",
+      "x": 7,
+      "y": 7,
+      "type": "Restaurant",
+      "capacity": 8,
+      "products": [
+        {
+          "name": "chicken",
+          "price": 12.0,
+          "stock": 80,
+          "satisfies_need": "energy"
+        }
+      ]
+    },
+    {
+      "name": "office",
+      "x": 2,
+      "y": 2,
+      "type": "Work",
+      "capacity": 20,
+      "products": []
+    }
+  ],
+  "agents": [
+    {
+      "id": "agent_1",
+      "name": "María",
+      "age": 28,
+      "profession": "Ingeniera",
+      "traits": ["extrovert", "health_conscious"],
+      "money": 500.0,
+      "energy": 100.0,
+      "home": "home",
+      "work": "office"
+    },
+    {
+      "id": "agent_2",
+      "name": "David",
+      "age": 35,
+      "profession": "Diseñador",
+      "traits": ["introvert", "thrifty"],
+      "money": 600.0,
+      "energy": 100.0,
+      "home": "home",
+      "work": "office"
+    },
+    {
+      "id": "agent_3",
+      "name": "Lisa",
+      "age": 25,
+      "profession": "Estudiante",
+      "traits": ["impulsive", "social"],
+      "money": 300.0,
+      "energy": 100.0,
+      "home": "home",
+      "work": null
+    }
+  ],
+  "marketing": [
+    {
+      "location_name": "Chicken Shop",
+      "discount_percent": 20,
+      "day_of_week": 2,
+      "start_hour": 12,
+      "end_hour": 14
+    }
+  ]
+}
+
+
+
+
+
