@@ -28,9 +28,302 @@ from cognition.decision_maker import DecisionMaker
 from cognition.response_parser import ResponseParser
 
 
+# ============ SISTEMA DE TRADUCCIONES (i18n) ============
+
+TRANSLATIONS = {
+    "es": {
+        # General
+        "page_title": "Sistema de Simulación Multi-Agente",
+        "subtitle": "Simulación de comportamiento de consumidores con IA",
+        "title": "MarketSim AI Behavioral Lab",
+        
+        # Language selector
+        "language": "Idioma",
+        "spanish": "Español",
+        "english": "English",
+        
+        # API Configuration
+        "api_config": "Configuración de API",
+        "api_key_input": "DeepSeek API Key",
+        "api_key_placeholder": "Ingresa tu API key aquí...",
+        "api_key_save": "Guardar API Key",
+        "api_key_clear": "Limpiar",
+        "api_key_saved": "✅ API Key guardada (solo para esta sesión)",
+        "api_key_cleared": "API Key eliminada",
+        "use_env_key": "Usar API Key del archivo .env",
+        "api_connected": "DeepSeek API Conectada",
+        "api_not_connected": "DeepSeek API No Conectada",
+        "api_key_missing": "⚠️ DEEPSEEK_API_KEY no configurada. El sistema funcionará en modo simulado.",
+        
+        # Sidebar
+        "command_center": "🎮 Command Center",
+        "setup": "⚙️ Setup",
+        "initialize_simulation": "🔄 Inicializar Simulación",
+        "load_config": "📁 Cargar Configuración",
+        "upload_json": "Subir JSON de configuración",
+        "active_campaigns": "📊 Campañas Activas",
+        "no_active_campaigns": "No hay campañas activas",
+        "campaign_manager": "📊 Campaign Manager",
+        "create_campaign": "Crear Nueva Campaña",
+        "target_location": "Ubicación Objetivo",
+        "discount_strategy": "Estrategia de Descuento (%)",
+        "day_of_week": "Día de la Semana",
+        "start_time": "Hora de Inicio",
+        "end_time": "Hora de Fin",
+        "time_window": "Ventana de Tiempo",
+        "deploy_campaign": "🚀 Desplegar Campaña",
+        "campaign_status": "📊 Estado de la Campaña",
+        "campaign_active": "🟢 **Campaña ACTIVA**",
+        "campaign_inactive": "🔴 **Campaña INACTIVA**",
+        "simulation_controls": "🎮 Controles de Simulación",
+        "play": "▶️ Play",
+        "pause": "⏸️ Pause",
+        "next_hour": "⏩ Siguiente Hora",
+        "skip_to_campaign": "⏭️ Saltar a",
+        "clear_log": "🗑️ Limpiar Log",
+        "day": "Día",
+        "hour": "Hora",
+        "active": "Activa",
+        "inactive": "Inactiva",
+        "cancel": "Cancelar",
+        "discount": "descuento",
+        
+        # Days of week
+        "monday": "Lunes",
+        "tuesday": "Martes",
+        "wednesday": "Miércoles",
+        "thursday": "Jueves",
+        "friday": "Viernes",
+        "saturday": "Sábado",
+        "sunday": "Domingo",
+        
+        # Main content
+        "quick_metrics": "📊 Métricas Rápidas (KPIs Globales)",
+        "active_agents": "Agentes Activos",
+        "total_spending": "Gasto Total Hoy",
+        "active_campaigns_label": "Campañas Activas",
+        
+        # Tabs
+        "tab_live_monitor": "🗺️ Monitoreo en Vivo",
+        "tab_campaign_manager": "📊 Gestor de Campañas",
+        "tab_market_intelligence": "📈 Inteligencia de Mercado",
+        "tab_agent_telemetry": "👥 Telemetría de Agentes",
+        
+        # Events
+        "day_start": "🌅 Inicio de nuevo día - Los agentes están planificando sus actividades",
+        "campaign_active_msg": "🎯 Campaña ACTIVA: {}% descuento en {} (Horario: {:02d}:00-{:02d}:00)",
+        "simulation_not_initialized": "⚠️ Simulación no inicializada correctamente",
+        
+        # Charts
+        "urban_heatmap": "Urban Heatmap",
+        "sales_chart": "Ventas Totales por Ubicación",
+        "loyalty_matrix": "Matriz de Lealtad - Visitas por Agente y Ubicación",
+        "social_graph": "Relaciones Sociales - Afinidad entre Agentes",
+        "no_sales_data": "No hay datos de ventas aún",
+        "no_loyalty_data": "No hay datos de lealtad aún",
+        "no_social_data": "No hay relaciones sociales registradas aún",
+        
+        # Agent telemetry
+        "agent_telemetry": "Telemetría de Agente (Feed de Eventos)",
+        "agent_details": "👤 Agente {} ({} años, {})",
+        "wallet": "Billetera",
+        "energy": "Energía",
+        "grocery_level": "Nivel de Comestibles",
+        "location": "Ubicación",
+        "coordinates": "Coordenadas",
+        "inventory": "Inventario",
+        "inventory_empty": "Vacío",
+        "reasoning": "🧠 Razonamiento",
+        "personality": "Personalidad",
+        "waiting_decisions": "Esperando próximas decisiones...",
+        
+        # Welcome
+        "welcome": "👈 Usa el panel lateral para inicializar la simulación",
+        "welcome_title": "Bienvenido al Sistema de Simulación Multi-Agente",
+        "welcome_description": "Este sistema simula el comportamiento de consumidores usando IA.",
+        "features_title": "**Características:**",
+        "feature_agents": "🤖 Agentes con personalidad y necesidades dinámicas",
+        "feature_world": "🗺️ Mundo con ubicaciones y productos",
+        "feature_economy": "💰 Sistema económico con campañas de marketing",
+        "feature_llm": "🧠 Toma de decisiones mediante LLM (DeepSeek)",
+        "feature_visualization": "📊 Visualización en tiempo real",
+        "steps_title": "**Pasos para comenzar:**",
+        "step1": "1. Configura tu API key de DeepSeek (en el panel lateral o archivo .env)",
+        "step2": "2. Haz clic en \"Inicializar Simulación\" en el panel lateral",
+        "step3": "3. Usa \"Ejecutar Siguiente Hora\" para avanzar la simulación",
+        "step4": "4. Observa el comportamiento de los agentes en tiempo real",
+    },
+    "en": {
+        # General
+        "page_title": "Multi-Agent Simulation System",
+        "subtitle": "AI-powered consumer behavior simulation",
+        "title": "MarketSim AI Behavioral Lab",
+        
+        # Language selector
+        "language": "Language",
+        "spanish": "Español",
+        "english": "English",
+        
+        # API Configuration
+        "api_config": "API Configuration",
+        "api_key_input": "DeepSeek API Key",
+        "api_key_placeholder": "Enter your API key here...",
+        "api_key_save": "Save API Key",
+        "api_key_clear": "Clear",
+        "api_key_saved": "✅ API Key saved (session only)",
+        "api_key_cleared": "API Key cleared",
+        "use_env_key": "Use API Key from .env file",
+        "api_connected": "DeepSeek API Connected",
+        "api_not_connected": "DeepSeek API Not Connected",
+        "api_key_missing": "⚠️ DEEPSEEK_API_KEY not configured. The system will run in simulated mode.",
+        
+        # Sidebar
+        "command_center": "🎮 Command Center",
+        "setup": "⚙️ Setup",
+        "initialize_simulation": "🔄 Initialize Simulation",
+        "load_config": "📁 Load Configuration",
+        "upload_json": "Upload JSON configuration file",
+        "active_campaigns": "📊 Active Campaigns",
+        "no_active_campaigns": "No active campaigns",
+        "campaign_manager": "📊 Campaign Manager",
+        "create_campaign": "Create New Campaign",
+        "target_location": "Target Location",
+        "discount_strategy": "Discount Strategy (%)",
+        "day_of_week": "Day of Week",
+        "start_time": "Start Time",
+        "end_time": "End Time",
+        "time_window": "Time Window",
+        "deploy_campaign": "🚀 Deploy Campaign",
+        "campaign_status": "📊 Campaign Status",
+        "campaign_active": "🟢 **Campaign ACTIVE**",
+        "campaign_inactive": "🔴 **Campaign INACTIVE**",
+        "simulation_controls": "🎮 Simulation Controls",
+        "play": "▶️ Play",
+        "pause": "⏸️ Pause",
+        "next_hour": "⏩ Next Hour",
+        "skip_to_campaign": "⏭️ Skip to",
+        "clear_log": "🗑️ Clear Log",
+        "day": "Day",
+        "hour": "Hour",
+        "active": "Active",
+        "inactive": "Inactive",
+        "cancel": "Cancel",
+        "discount": "discount",
+        
+        # Days of week
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        
+        # Main content
+        "quick_metrics": "📊 Quick Metrics (Global KPIs)",
+        "active_agents": "Active Agents",
+        "total_spending": "Total Spending Today",
+        "active_campaigns_label": "Active Campaigns",
+        
+        # Tabs
+        "tab_live_monitor": "🗺️ Live Monitor",
+        "tab_campaign_manager": "📊 Campaign Manager",
+        "tab_market_intelligence": "📈 Market Intelligence",
+        "tab_agent_telemetry": "👥 Agent Telemetry",
+        
+        # Events
+        "day_start": "🌅 Start of new day - Agents are planning their activities",
+        "campaign_active_msg": "🎯 Campaign ACTIVE: {}% discount at {} (Time: {:02d}:00-{:02d}:00)",
+        "simulation_not_initialized": "⚠️ Simulation not properly initialized",
+        
+        # Charts
+        "urban_heatmap": "Urban Heatmap",
+        "sales_chart": "Total Sales by Location",
+        "loyalty_matrix": "Loyalty Matrix - Visits by Agent and Location",
+        "social_graph": "Social Relationships - Affinity between Agents",
+        "no_sales_data": "No sales data yet",
+        "no_loyalty_data": "No loyalty data yet",
+        "no_social_data": "No social relationships registered yet",
+        
+        # Agent telemetry
+        "agent_telemetry": "Agent Telemetry (Event Feed)",
+        "agent_details": "👤 Agent {} ({} years old, {})",
+        "wallet": "Wallet",
+        "energy": "Energy",
+        "grocery_level": "Grocery Level",
+        "location": "Location",
+        "coordinates": "Coordinates",
+        "inventory": "Inventory",
+        "inventory_empty": "Empty",
+        "reasoning": "🧠 Reasoning",
+        "personality": "Personality",
+        "waiting_decisions": "Waiting for upcoming decisions...",
+        
+        # Welcome
+        "welcome": "👈 Use the sidebar to initialize the simulation",
+        "welcome_title": "Welcome to the Multi-Agent Simulation System",
+        "welcome_description": "This system simulates consumer behavior using AI.",
+        "features_title": "**Features:**",
+        "feature_agents": "🤖 Agents with personality and dynamic needs",
+        "feature_world": "🗺️ World with locations and products",
+        "feature_economy": "💰 Economic system with marketing campaigns",
+        "feature_llm": "🧠 Decision making through LLM (DeepSeek)",
+        "feature_visualization": "📊 Real-time visualization",
+        "steps_title": "**Steps to get started:**",
+        "step1": "1. Configure your DeepSeek API key (in sidebar or .env file)",
+        "step2": "2. Click \"Initialize Simulation\" in the sidebar",
+        "step3": "3. Use \"Execute Next Hour\" to advance the simulation",
+        "step4": "4. Observe agent behavior in real-time",
+    }
+}
+
+
+def get_translation(key: str, *args) -> str:
+    """Get translation for current language"""
+    lang = st.session_state.get("language", "es")
+    text = TRANSLATIONS.get(lang, TRANSLATIONS["es"]).get(key, key)
+    if args:
+        try:
+            return text.format(*args)
+        except:
+            return text
+    return text
+
+
+def t(key: str, *args) -> str:
+    """Shortcut for get_translation"""
+    return get_translation(key, *args)
+
+
+def get_day_names() -> List[str]:
+    """Get list of day names in current language"""
+    return [t("monday"), t("tuesday"), t("wednesday"), t("thursday"), 
+            t("friday"), t("saturday"), t("sunday")]
+
+
+def get_day_map() -> Dict[str, int]:
+    """Get mapping of day names to numbers"""
+    day_names = get_day_names()
+    return {day: idx for idx, day in enumerate(day_names)}
+
+
+# ============ CONFIGURACIÓN INICIAL ============
+
+# Initialize language (default: Spanish)
+if "language" not in st.session_state:
+    st.session_state.language = "es"
+
+# Initialize user API key
+if "user_api_key" not in st.session_state:
+    st.session_state.user_api_key = None
+
+# Initialize API key source preference
+if "api_key_source" not in st.session_state:
+    st.session_state.api_key_source = "user"  # "user" or "env"
+
 # Configuración de la página
 st.set_page_config(
-    page_title="Sistema de Simulación Multi-Agente",
+    page_title=t("page_title"),
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -55,6 +348,27 @@ if "response_parser" not in st.session_state:
     st.session_state.response_parser = None
 if "last_campaign_check" not in st.session_state:
     st.session_state.last_campaign_check = {}  # Para rastrear campañas activas
+
+
+# ============ FUNCIÓN PARA OBTENER API KEY ============
+
+def get_api_key() -> Optional[str]:
+    """Get API key prioritizing user input over .env"""
+    # Priority 1: User-provided API key
+    if st.session_state.user_api_key:
+        return st.session_state.user_api_key
+    
+    # Priority 2: .env file (only if user hasn't set preference)
+    if st.session_state.api_key_source == "env":
+        return os.getenv("DEEPSEEK_API_KEY")
+    
+    # Check if .env key exists
+    env_key = os.getenv("DEEPSEEK_API_KEY")
+    if env_key:
+        # If .env exists and no user key, use .env
+        return env_key
+    
+    return None
 
 
 def initialize_simulation():
@@ -162,7 +476,7 @@ def initialize_simulation():
     transaction_system = TransactionSystem(world_config)
     
     # Inicializar cliente LLM
-    api_key = os.getenv("DEEPSEEK_API_KEY")
+    api_key = get_api_key()
     if api_key:
         llm_client = LLMClient(api_key=api_key)
         decision_maker = DecisionMaker(world_config, locations, llm_client)
@@ -173,7 +487,7 @@ def initialize_simulation():
         llm_client = None
         decision_maker = None
         response_parser = None
-        st.warning("⚠️ DEEPSEEK_API_KEY no configurada. El sistema funcionará en modo simulado.")
+        st.warning(t("api_key_missing"))
     
     # Guardar en session state
     st.session_state.world_config = world_config
@@ -261,7 +575,7 @@ def execute_tick():
     response_parser = st.session_state.response_parser
     
     if not all([world_config, agents, time_manager, interaction_engine]):
-        st.error("⚠️ Simulación no inicializada correctamente")
+        st.error(t("simulation_not_initialized"))
         return
     
     # 1. Avanzar tiempo
@@ -272,7 +586,7 @@ def execute_tick():
         st.session_state.event_log.append({
             "time": time_manager.get_time_string(),
             "type": "system",
-            "message": "🌅 Inicio de nuevo día - Los agentes están planificando sus actividades"
+            "message": t("day_start")
         })
         
         # Planificar día para todos los agentes en paralelo
@@ -296,7 +610,11 @@ def execute_tick():
             st.session_state.event_log.append({
                 "time": time_manager.get_time_string(),
                 "type": "system",
-                "message": f"🎯 Campaña ACTIVA: {campaign.get('discount_percent')}% descuento en {location_name} (Horario: {campaign.get('start_hour', 0):02d}:00-{campaign.get('end_hour', 24):02d}:00)"
+                "message": t("campaign_active_msg", 
+                           campaign.get('discount_percent', 0), 
+                           location_name,
+                           campaign.get('start_hour', 0),
+                           campaign.get('end_hour', 24))
             })
     
     # Limpiar checks antiguos (mantener solo las últimas 24 horas)
@@ -1026,62 +1344,116 @@ def create_social_graph():
 # ============ INTERFAZ STREAMLIT ============
 
 # Título principal moderno
-st.markdown("""
+st.markdown(f"""
 <div style="padding: 1rem 0;">
     <h1 style="font-size: 2.5rem; font-weight: 700; color: #1f77b4; margin-bottom: 0.2rem;">
-        MarketSim AI Behavioral Lab
+        {t("title")}
     </h1>
     <p style="font-size: 1.1rem; color: #666; margin-top: 0;">
-        Simulación de comportamiento de consumidores con IA
+        {t("subtitle")}
     </p>
 </div>
 """, unsafe_allow_html=True)
 
 # Sidebar - Command Center & Global KPIs
 with st.sidebar:
-    st.markdown("### 🎮 Command Center")
+    # Selector de idioma AL INICIO del sidebar
+    lang_options = {"🇪🇸 Español": "es", "🇬🇧 English": "en"}
+    selected_lang_display = st.selectbox(
+        t("language"),
+        options=list(lang_options.keys()),
+        index=0 if st.session_state.language == "es" else 1,
+        key="lang_selector"
+    )
+    new_lang = lang_options[selected_lang_display]
+    if new_lang != st.session_state.language:
+        st.session_state.language = new_lang
+        st.rerun()
+    
+    st.markdown("---")
+    st.markdown(f"### {t('command_center')}")
     
     # Estado de conexión API
-    api_key = os.getenv("DEEPSEEK_API_KEY")
-    if api_key and st.session_state.llm_client:
-        st.markdown("""
-        <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background-color: #d4edda; border-radius: 0.5rem; margin-bottom: 1rem;">
-            <div style="width: 10px; height: 10px; background-color: #28a745; border-radius: 50%;"></div>
-            <span>DeepSeek API Connected</span>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown("""
-        <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background-color: #f8d7da; border-radius: 0.5rem; margin-bottom: 1rem;">
-            <div style="width: 10px; height: 10px; background-color: #dc3545; border-radius: 50%;"></div>
-            <span>DeepSeek API Not Connected</span>
-        </div>
-        """, unsafe_allow_html=True)
+    current_api_key = get_api_key()
+    api_connected = current_api_key and st.session_state.llm_client
+    status_color = "#d4edda" if api_connected else "#f8d7da"
+    status_dot_color = "#28a745" if api_connected else "#dc3545"
+    status_text = t("api_connected") if api_connected else t("api_not_connected")
+    
+    st.markdown(f"""
+    <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background-color: {status_color}; border-radius: 0.5rem; margin-bottom: 1rem;">
+        <div style="width: 10px; height: 10px; background-color: {status_dot_color}; border-radius: 50%;"></div>
+        <span>{status_text}</span>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # API Key Configuration Section
+    st.markdown("---")
+    st.markdown(f"### 🔑 {t('api_config')}")
+    
+    # User API Key Input
+    user_api_key = st.text_input(
+        t("api_key_input"),
+        value=st.session_state.user_api_key if st.session_state.user_api_key else "",
+        type="password",
+        placeholder=t("api_key_placeholder"),
+        help="Your API key is stored only in this browser session and will be cleared when you refresh the page."
+    )
+    
+    col_save, col_clear = st.columns(2)
+    with col_save:
+        if st.button(t("api_key_save"), use_container_width=True):
+            if user_api_key and user_api_key.strip():
+                st.session_state.user_api_key = user_api_key.strip()
+                st.session_state.api_key_source = "user"
+                st.success(t("api_key_saved"))
+                st.rerun()
+    
+    with col_clear:
+        if st.button(t("api_key_clear"), use_container_width=True):
+            st.session_state.user_api_key = None
+            st.session_state.api_key_source = "env"
+            st.info(t("api_key_cleared"))
+            st.rerun()
+    
+    # Option to use .env file (only if it exists)
+    env_api_key = os.getenv("DEEPSEEK_API_KEY")
+    if env_api_key:
+        use_env = st.checkbox(
+            t("use_env_key"),
+            value=st.session_state.api_key_source == "env" and not st.session_state.user_api_key,
+            help="Use the API key from your .env file instead of the one entered above."
+        )
+        if use_env and not st.session_state.user_api_key:
+            st.session_state.api_key_source = "env"
+        elif not use_env and st.session_state.user_api_key:
+            st.session_state.api_key_source = "user"
     
     # Fecha y Hora
     if st.session_state.world_config:
         world_config = st.session_state.world_config
-        day_names = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        day_names = [t("monday"), t("tuesday"), t("wednesday"), t("thursday"), 
+                    t("friday"), t("saturday"), t("sunday")]
         day_name = day_names[world_config.get_day_of_week()]
         st.markdown(f"""
         <div style="padding: 0.5rem; background-color: #f0f2f6; border-radius: 0.5rem; margin-bottom: 1rem;">
-            <strong>Día:</strong> {day_name} | <strong>Hora:</strong> {world_config.current_hour:02d}:{world_config.current_minute:02d}
+            <strong>{t('day')}:</strong> {day_name} | <strong>{t('hour')}:</strong> {world_config.current_hour:02d}:{world_config.current_minute:02d}
         </div>
         """, unsafe_allow_html=True)
     
     st.markdown("---")
     
     # Inicialización
-    st.markdown("#### ⚙️ Setup")
+    st.markdown(f"#### {t('setup')}")
     
     # Inicialización
-    if st.button("🔄 Inicializar Simulación", use_container_width=True):
+    if st.button(t("initialize_simulation"), use_container_width=True):
         initialize_simulation()
         st.rerun()
     
     # Cargar configuración
-    st.subheader("📁 Cargar Configuración")
-    uploaded_file = st.file_uploader("Subir JSON de configuración", type=["json"])
+    st.subheader(f"{t('load_config')}")
+    uploaded_file = st.file_uploader(t("upload_json"), type=["json"])
     if uploaded_file is not None:
         if load_config_from_json(uploaded_file):
             # Reinicializar motores después de cargar
@@ -1092,7 +1464,7 @@ with st.sidebar:
             st.session_state.interaction_engine = InteractionEngine(world_config)
             st.session_state.transaction_system = TransactionSystem(world_config)
             
-            api_key = os.getenv("DEEPSEEK_API_KEY")
+            api_key = get_api_key()
             if api_key:
                 llm_client = LLMClient(api_key=api_key)
                 st.session_state.llm_client = llm_client
@@ -1106,7 +1478,7 @@ with st.sidebar:
     
     # Active Campaigns
     st.markdown("---")
-    st.markdown("### 📊 Campañas Activas")
+    st.markdown(f"### {t('active_campaigns')}")
     
     if st.session_state.world_config and st.session_state.world_config.marketing_campaigns:
         campaign = st.session_state.world_config.marketing_campaigns[0]
@@ -1117,43 +1489,42 @@ with st.sidebar:
         is_active_hour = (campaign.get("start_hour", 0) <= current_hour < campaign.get("end_hour", 24))
         is_active = is_active_day and is_active_hour
         
-        day_names = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        day_names = get_day_names()
         campaign_day_name = day_names[campaign.get("day_of_week", 0)]
         
         status_color = "🟢" if is_active else "🔴"
-        status_text = "Active" if is_active else "Inactive"
+        status_text = t("active") if is_active else t("inactive")
         
         st.markdown(f"{status_color} **{status_text}**")
         st.markdown(f"**{campaign.get('location_name', '')}** | {campaign.get('discount_percent', 0)}%")
         st.caption(f"{campaign_day_name} {campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00")
     else:
-        st.info("No hay campañas activas")
+        st.info(t("no_active_campaigns"))
     
     # Campaign Manager
     st.markdown("---")
-    st.markdown("### 📊 Campaign Manager")
+    st.markdown(f"### {t('campaign_manager')}")
     
     if st.session_state.world_config:
-        st.markdown("#### Crear Nueva Campaña")
+        st.markdown(f"#### {t('create_campaign')}")
         discount_location = st.selectbox(
-            "Target Location",
+            t("target_location"),
             options=list(st.session_state.locations.keys()),
             index=0 if st.session_state.locations else None
         )
-        discount_percent = st.slider("Discount Strategy (%)", 0, 50, 20)
+        discount_percent = st.slider(t("discount_strategy"), 0, 50, 20)
         discount_day = st.selectbox(
-            "Day of Week",
-            options=["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+            t("day_of_week"),
+            options=get_day_names(),
             index=2
         )
-        discount_start = st.slider("Start Time", 0, 23, 12)
-        discount_end = st.slider("End Time", 0, 23, 14)
-        st.markdown(f"**Time Window:** {discount_day} {discount_start:02d}:00 - {discount_end:02d}:00")
+        discount_start = st.slider(t("start_time"), 0, 23, 12)
+        discount_end = st.slider(t("end_time"), 0, 23, 14)
+        st.markdown(f"**{t('time_window')}:** {discount_day} {discount_start:02d}:00 - {discount_end:02d}:00")
         
-        if st.button("🚀 Deploy Campaign", use_container_width=True, type="primary"):
-            day_map = {"Lunes": 0, "Martes": 1, "Miércoles": 2, "Jueves": 3,
-                      "Viernes": 4, "Sábado": 5, "Domingo": 6}
-            campaign_day = day_map[discount_day]
+        if st.button(t("deploy_campaign"), use_container_width=True, type="primary"):
+            day_names_list = get_day_names()
+            campaign_day = day_names_list.index(discount_day) if discount_day in day_names_list else 2
             
             st.session_state.world_config.marketing_campaigns = [{
                 "location_name": discount_location,
@@ -1187,41 +1558,32 @@ with st.sidebar:
             is_active_hour = (campaign.get("start_hour", 0) <= current_hour < campaign.get("end_hour", 24))
             is_active = is_active_day and is_active_hour
             
-            day_names = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+            day_names = get_day_names()
             campaign_day_name = day_names[campaign.get("day_of_week", 0)]
             
             st.markdown("---")
-            st.subheader("📊 Estado de la Campaña")
+            st.subheader(t("campaign_status"))
             
             if is_active:
-                st.success(f"🟢 **Campaña ACTIVA**\n\n📍 {campaign.get('location_name')}: {campaign.get('discount_percent')}% descuento\n⏰ Horario: {campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00")
+                st.success(f"{t('campaign_active')}\n\n📍 {campaign.get('location_name')}: {campaign.get('discount_percent')}% {t('discount')}\n⏰ {t('hour')}: {campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00")
             else:
-                st.info(f"🔴 **Campaña INACTIVA**\n\n📍 {campaign.get('location_name')}: {campaign.get('discount_percent')}% descuento\n📅 Día: {campaign_day_name} (Día {campaign.get('day_of_week')})\n⏰ Horario: {campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00\n\n**Estado actual:**\n- Día: {day_names[current_day_of_week]} (Día {current_day})\n- Hora: {current_hour:02d}:00\n\n**Para activar:**")
-                if not is_active_day:
-                    days_needed = (campaign.get("day_of_week") - current_day_of_week) % 7
-                    st.warning(f"⚠️ Necesitas avanzar {days_needed} día(s) para llegar a {campaign_day_name}. Usa 'Avanzar 5 Horas' repetidamente (necesitas ~{days_needed * 24} horas).")
-                elif not is_active_hour:
-                    if current_hour < campaign.get("start_hour", 0):
-                        hours_needed = campaign.get("start_hour", 0) - current_hour
-                        st.warning(f"⚠️ Necesitas avanzar {hours_needed} hora(s) para que inicie la campaña (será a las {campaign.get('start_hour', 0):02d}:00).")
-                    else:
-                        st.warning(f"⚠️ La campaña ya pasó por hoy. Espera hasta el próximo {campaign_day_name} o avanza un día.")
+                st.info(f"{t('campaign_inactive')}\n\n📍 {campaign.get('location_name')}: {campaign.get('discount_percent')}% {t('discount')}\n📅 {t('day')}: {campaign_day_name}\n⏰ {t('hour')}: {campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00")
     
     # Simulation Controls
     st.markdown("---")
-    st.markdown("### 🎮 Simulation Controls")
+    st.markdown(f"### {t('simulation_controls')}")
     
     if st.session_state.world_config:
         col_play, col_pause = st.columns(2)
         with col_play:
-            if st.button("▶️ Play", use_container_width=True):
+            if st.button(t("play"), use_container_width=True):
                 st.session_state.simulation_running = True
                 st.rerun()
         with col_pause:
-            if st.button("⏸️ Pause", use_container_width=True):
+            if st.button(t("pause"), use_container_width=True):
                 st.session_state.simulation_running = False
         
-        if st.button("⏩ Next Hour", use_container_width=True):
+        if st.button(t("next_hour"), use_container_width=True):
             execute_tick()
             st.rerun()
         
@@ -1234,7 +1596,7 @@ with st.sidebar:
             
             # Calcular cuántos días faltan para llegar al día de la campaña
             days_needed = (campaign_day - current_day_of_week) % 7
-            day_names = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+            day_names = get_day_names()
             campaign_day_name = day_names[campaign_day]
             location_name = campaign.get("location_name", "ubicación")
             
@@ -1254,7 +1616,7 @@ with st.sidebar:
                     hours_to_advance = 7 * 24 - (24 - current_hour) + start_hour
                     campaign_day_name = day_names[campaign_day]  # Mismo día la próxima semana
                 
-                button_text = f"⏭️ Skip to {campaign_day_name} {start_hour:02d}:00"
+                button_text = f"{t('skip_to_campaign')} {campaign_day_name} {start_hour:02d}:00"
                 if st.button(button_text, use_container_width=True):
                     # Usar barra de progreso para mostrar avance
                     progress_bar = st.progress(0)
@@ -1266,7 +1628,7 @@ with st.sidebar:
                             progress_bar.progress((i + 1) / total_hours)
                     st.rerun()
         
-        if st.button("🗑️ Limpiar Log", use_container_width=True):
+        if st.button(t("clear_log"), use_container_width=True):
             st.session_state.event_log = []
             st.rerun()
 
@@ -1364,21 +1726,21 @@ if st.session_state.world_config:
                 is_active_hour = (campaign.get("start_hour", 0) <= world_config.current_hour < campaign.get("end_hour", 24))
                 is_active = is_active_day and is_active_hour
                 
-                day_names = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+                day_names = get_day_names()
                 campaign_day_name = day_names[campaign.get("day_of_week", 0)]
                 
                 status_color = "🟢" if is_active else "🔴"
-                status_text = "Active" if is_active else "Inactive"
+                status_text = t("active") if is_active else t("inactive")
                 
                 col_status, col_info, col_action = st.columns([1, 3, 1])
                 with col_status:
                     st.markdown(f"### {status_color}")
                     st.caption(status_text)
                 with col_info:
-                    st.markdown(f"**{idx}. {campaign.get('location_name', '')}** | {campaign.get('discount_percent', 0)}% descuento")
-                    st.caption(f"Día: {campaign_day_name} ({campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00)")
+                    st.markdown(f"**{idx}. {campaign.get('location_name', '')}** | {campaign.get('discount_percent', 0)}% {t('discount')}")
+                    st.caption(f"{t('day')}: {campaign_day_name} ({campaign.get('start_hour', 0):02d}:00 - {campaign.get('end_hour', 24):02d}:00)")
                 with col_action:
-                    if st.button("Cancel", key=f"cancel_{idx}"):
+                    if st.button(t("cancel"), key=f"cancel_{idx}"):
                         world_config.marketing_campaigns = []
                         st.rerun()
                 st.markdown("---")

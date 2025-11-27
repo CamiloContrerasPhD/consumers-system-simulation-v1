@@ -234,3 +234,4 @@ relationship_change puede ser positivo (acercamiento), negativo (alejamiento), o
 
 
 
+
